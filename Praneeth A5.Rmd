@@ -1,0 +1,60 @@
+---
+title: "A5- Naga Praneeth"
+output: word_document
+date: "2023-11-07"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+1 a) Data is not in the straight line. But, there is a significant correlation. 
+  b) The points in the scatter plot form a tight cluster around a straight line, with a positive slope. This suggests that there is a strong, positive relationship between the two variables. Fitting a linear model to the data would be reasonable, and the model would likely provide a good fit.
+  c) The points in the scatter plot are scattered widely, with no clear trend. This suggests that there is a weak relationship between the two variables, and that a linear model would not be a good fit. and that a linear model would not be a good fit
+  d) Data doesnot follow a path of straight line. But, it has a moderate correlation between the variables.
+  e) The points in the scatter plot form a tight cluster around a straight line, with a negative slope. This suggests that there is a strong, negative relationship between the two variables.
+  f) The points in the scatter plot are scattered widely, with a weak downward trend. This suggests that there is a weak, negative relationship between the two variables.
+  
+  
+2 a) The scatterplot shows a positive linear relationship between shoulder girth and height. This means that as shoulder girth increases, height also      tends to increase.
+  b) If shoulder girth was measured in inches while the units of height remained in centimeters, the relationship between the two variables would still be positive and linear. However, the slope of the line would be different, as there are 2.54 centimeters per inch. This means that the line would be steeper, as a one-inch increase in shoulder girth would correspond to a larger increase in height. The overall strength of the relationship would not change.
+  
+3. A residual is the difference between the actual value and the predicted value. A negative residual means that the actual value is less than the predicted value. In this case, the actual shelf life of the apple is 4 days, while the predicted shelf life is 4.6 days. Therefore, we overestimated the shelf life of the apple.
+
+4. a) From the scatterplot, we can see that the line is a good fit for the data. The points are tightly clustered around the line, and there is no obvious pattern in the residuals. This suggests that the linear model is a good approximation of the relationship between length and height.
+   b) Using the formulas for calculating the slope (b) and intercept (a) in a linear regression equation, we can find the values to be b = 0.85(95.62/20.68) = 3.9302 and a = 1261.21 - (3.9302 * 20.68) = 468.2922. Thus, the regression line for predicting the length from the height can be represented as Y = 468.2922 + 3.9302X, where the length is equal to 468.2922 plus 3.9302 times the height.
+   c) To estimate the predicted mean length of a guppy with height 180 cm, we simply substitute height = 180 into the regression equation:
+      Y = 468.2922 + 3.9302 * 180 =  1175.6482.
+      
+5. a) The residual plot will show residuals distributed uniformly around 0 in a random pattern, with the residual variances remaining relatively stable.
+   b) The residual plot will exhibit a fan-like pattern, indicating increased variability for smaller x values. Moreover, numerous data points on the right side of the plot will be positioned above the regression line, implying potential problems with the suitability of the current model for the data.
+   
+6. a) A linear and direct connection exists between the quantity of carbohydrates and calorie count, meaning that as carbohydrates increase, so do calories. However, it's worth noting that the correlation between these two variables is relatively weak.
+   
+   b) In this context, the number of calories serves as the independent variable, while the amount of carbohydrates is considered the dependent variable.
+
+   c) The capability to construct a regression line empowers us to make predictions, specifically in this case, enabling us to estimate carbohydrate levels based on the calorie count.
+
+   d) The residuals exhibit a distribution that's close to normal, and the data can be visually represented with a linear graph. Nevertheless, the variability is not consistent. It's also uncertain whether the scatter plots are independent, given that they involve items from the Starbucks menu.
+   
+7. The scatterplot suggests a V-shaped pattern in the case of higher values, implying that there is either no strong linear relationship or a very minimal linear connection between the two variables.
+
+
+8. a) There is a noticeable outlier positioned significantly to the right of the main cluster of data points. This outlier exerts a substantial impact on the least squares line, causing it to deviate significantly from the majority of data points. This suggests that the outlier is influential.
+
+b) Another outlier is located far to the bottom right of the central cluster of data points, indicating that it holds a position of high leverage. Surprisingly, this outlier aligns with the least squares line and doesn't seem to exert a strong influence on the line's position.
+
+c) In contrast, a different outlier is situated at a considerable vertical distance above the cluster of data points but doesn't extend far horizontally. As a result, this point lacks high leverage and doesn't appear to exert a substantial influence on the position of the line.
+
+d) The outlier is influential and is situated at the upper left corner of the plot. As the fit of the regression line is greatly influenced by this point, it is a point with high leverage.
+
+e) The lower left corner of the plot contains an outlier that is considered influential. It is horizontally far from the rest of the data it is a high leverage point
+
+f) The outlier is positioned towards the upper-middle of the plot, it is not considered as influential outlier as it is near to the horizontal center of the data.
+
+9. a) The scatterplot illustrates a robust and positive linear connection between the quantity of beer cans consumed and Blood Alcohol Concentration (BAC). This indicates that as the consumption of beer cans rises, there is a corresponding increase in BAC levels. The line's slope is positive, and the correlation coefficient demonstrates a strong association between these two variables.
+  
+   b) BAC=Intercept+b1∗beers  -----> BAC=−0.0127+0.0180∗beers
+  
+   c) The data reveals a significant rise in blood alcohol concentration (BAC) as the number of beer cans consumed increases, challenging the null hypothesis. This finding is reinforced by a statistically significant p-value, indicating that an increase in the consumption of beer cans leads to a higher BAC.
+   
+   d) The R-squared value, which is derived by squaring the correlation coefficient, is calculated to be 0.7921. This means that roughly 79.21% of the variations observed in blood alcohol content can be explained by the quantity of beer cans consumed.

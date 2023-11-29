@@ -1,0 +1,172 @@
+---
+title: "Naga Praneeth A6"
+author: "Naga Praneeth"
+date: "2023-11-16"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+1.a)
+
+Null Hypothesis (H0): There is no association between age and RFFT score (the slope of the age predictor is zero).
+
+Alternative Hypothesis (H1): There is an association between age and RFFT score (the slope of the age predictor is not zero).
+
+P-value: The p-value for age is 0.000, which is less than the α level of 0.01.
+
+Conclusion: Since the p-value is less than 0.01, we reject the null hypothesis and conclude that there is statistically significant evidence at the α = 0.01 significance level that age is associated with RFFT score.
+
+1.b)
+
+The 99% confidence interval for the population slope (the effect of age on RFFT score) is approximately (−1.49,−1.03). This means we are 99% confident that the true average decrease in RFFT score for each additional year of age lies between 1.49 and 1.03 points. The negative sign indicates that as age increases, the RFFT score tends to decrease.
+
+2.
+
+a)
+```{r}
+std_e <- 0.435
+cv <- qt(0.975, 169)
+l <- 51.69 - cv * std_e
+u <- 51.69 + cv * std_e
+cat("95% confidence interval is (", round(l,3), "," , round(u,3), ") years.")
+
+```
+b)
+```{r}
+se <- 3.97
+lo <- 51.69 - (1.97 * 3.97)
+up<- 51.69 + (1.97 * 3.97)
+c(lo, up)
+s <- 3.95
+n <- 170
+se_approx <- s / sqrt(n)
+lo.approx <- 51.69 - (1.96 * se_approx)
+up.approx <- 51.69 + (1.96 * se_approx)
+c(lo.approx, up.approx)
+```
+c)
+```{r}
+# Variability measure of the sample
+sampleVariability <- 3.95
+
+# Count of observations
+observationCount <- 170
+
+# Deriving the Margin of Error for Confidence Interval
+marginErrorConfidence <- sampleVariability / sqrt(observationCount)
+marginErrorConfidence
+
+# Computing the Margin of Error for Prediction Interval with new identifiers
+marginErrorPrediction <- sampleVariability * sqrt(1 + (1/observationCount))
+marginErrorPrediction
+
+```
+
+3.
+
+a) equation = 120.07 - 1.93 * parity
+
+b) The slope for the smoking status is −8.96, suggests that, holding other factors constant, the average birth weight of babies born to mothers who smoke is 8.96 ounces less than the average birth weight of babies born to non-smoking mothers.
+
+c) For two infants born to non-smoking mothers (smoke=0), the difference due to parity is the coefficient of the parity variable. Therefore, if one baby is the firstborn and the other is not, the estimated difference in mean birth weight is the absolute value, which is 1.98 ounces.
+
+d) For two infants born to mothers who smoke (smoke=1), the estimated difference due to parity is still the absolute value of (-1.98), since the smoking variable is constant for both babies. The difference remains 1.98 ounces.
+
+e) For a firstborn baby born to a non-smoking mother, the predicted mean birth weight is calculated by setting smoke=0 and parity=1 in the regression equation:
+ y = 123.57 - 8.96(0) - 1.98(1)
+ y = 121.59
+ 
+4.
+
+a) babyweight = -80.41 + 0.44 * gestation - 3.33 * parity - 0.01 * age + 1.15 * height + 0.02 * weight - 8.4 * smoke
+
+b) The slope for gestation, 0.44 means that for each additional day of pregnancy, the birth weight of the baby increases by 0.44 ounces on average, holding all other variables constant. The slope for age,−0.01 suggests that for each additional year of the mother's age, the birth weight of the baby decreases by 0.01 ounces on average, holding all other variables constant.
+
+c) The coefficient for parity is different in this multivariable model compared to the previous simple linear model. This could be due to the inclusion of additional variables that may be correlated with parity, which can alter the estimated effect of parity when these variables are accounted for in the model. Multicollinearity, where parity might be correlated with one or more of the other independent variables, leading to changes in the estimated coefficients when these variables are included.
+
+d) 
+```{r}
+Actualbabyweight <- 120
+
+#coefficients
+intercept <- -80.41
+coeff_gestation <- 0.44
+coeff_age <- -0.01
+coeff_height <- 1.15
+coeff_weight <- 0.05
+coeff_smoke <- -8.40
+coeff_parity <- -3.33
+# Variables
+gestation <- 284
+parity <- 0
+age <- 27
+height <- 62
+weight <- 100
+smoke <- 0
+
+modelbabyweight <- intercept + 
+                   (coeff_gestation * gestation) + 
+                   (coeff_parity * parity) + 
+                   (coeff_age * age) + 
+                   (coeff_height * height) + 
+                   (coeff_weight * weight) + 
+                   (coeff_smoke * smoke)
+ print(modelbabyweight)
+
+Residual <- Actualbabyweight - modelbabyweight
+print(Residual)
+
+```
+
+e)
+```{r}
+
+variance_residuals <- 249.28
+variance_bwt <- 332.57
+
+n <- 1236
+k <- 6 
+
+
+R_squared <- 1 - (variance_residuals / variance_bwt)
+
+adjusted_R_squared <- 1 - ((variance_residuals * (n - 1)) / (variance_bwt * (n - k - 1)))
+
+
+cat("R^2:", R_squared, "\n")
+cat("Adjusted R^2:", adjusted_R_squared)
+
+```
+
+5.
+
+a) The value of R^2 = 0.597 means that approximately 59.7% of the variability in the child’s systolic blood pressure is explained by the model that includes the mother’s and father’s blood pressures.
+
+b) To determine if the associations are statistically significant, we would typically look at the p-values for each of the parent's blood pressure coefficients (b1 and b2). These are not provided directly, but we can infer significance from the standard errors and the values of the coefficients. If we assume that the sample size is large enough for the t-distribution to be approximated by the normal distribution, we can calculate the t-values for each coefficient:
+
+t = Coefficient / Standard Error
+```{r}
+t1 <- 0.415/0.125
+print(t1)
+t2 <- 0.423/0.119
+print(t2)
+```
+These t-values would then be compared to a critical t-value from the t-distribution with n−3 degrees of freedom (since there are three estimated parameters) to determine significance. Given that thee are 20 families in the sample i.e degree of freedom is 17. A t-value larger in magnitude than the critical value would indicate statistical significance. This shows the systolic pressure of the each parent and the systolic blood pressure of the child are statistically significant. 
+
+c) The predicted blood pressure for a child can be calculated by plugging the mother’s and father’s blood pressures into the regression equation:
+
+E(Y)= −15.69+0.415×125+0.423×140
+E(Y) = 95.4
+
+d) The negative intercept in the context of blood pressure or any other measure that cannot be negative in reality can be a result of extrapolation beyond the range of the data. The intercept is the estimated value of Y when all X's are zero, which may not be a possible or meaningful condition for the model. In practice, the intercept is often not of primary interest, and the model can still provide valid predictions within the range of observed data.
+
+e) Residual vs. Fitted Plot: This plot is used to detect non-linearity, unequal error variances, and outliers. Ideally, the residuals should be randomly dispersed around the horizontal axis, with no clear pattern.
+
+Normal Q-Q Plot: This is used to check the normality of residuals. If the residuals are normally distributed, they should fall approximately along a straight line.
+
+Scale-Location Plot (or Spread-Location Plot): This shows residuals spread along the ranges of predictors. This is useful for checking the homoscedasticity of residuals (equal variances).
+
+

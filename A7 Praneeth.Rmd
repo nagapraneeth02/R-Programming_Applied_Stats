@@ -1,0 +1,188 @@
+---
+title: "A7 Naga Praneeth"
+author: "Naga Praneeth"
+date: "2023-11-22"
+output:
+  word_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+1a)  A medical research encompassing 1,350 medical students from 25 campuses looked at the relationship
+across resilience and depressive symptoms using a regression model. The overall trend shows that as resilience increases, depressive symptoms, as measured by the Beck Depression Inventory (BDI), tend to decrease. In other words, students with higher resilience scores generally reported fewer or less severe depressive symptoms.
+
+1b) It has a meaningful interpretation, indicating the mean BDI score for those in the very high resilience category when all other variables are held at zero. Here, the intercept is 4.9754, suggesting that, on average, those with very high resilience have a BDI score close to this value.
+
+1c) For low resilience: The predicted mean BDI score is the intercept plus the coefficient for low resilience, which is 
+4.9754+9.6538=14.6292.
+For very low resilience: The predicted mean BDI score is the intercept plus the coefficient for very low resilience, which is 
+4.9754+15.6453=20.6207.
+So, the difference in the predicted mean BDI score between someone with very low resilience and someone with low resilience is 
+20.6207−14.6292=5.9915, which is approximately 6 points on the BDI scale. This difference suggests that those with very low resilience are expected to have a mean BDI score about 6 points higher, indicating more severe depressive symptoms, compared to those with low resilience.
+
+
+
+1d) The level of resilience is indeed associated with depressive symptoms. All categories of resilience have a significant relationship with BDI scores, as indicated by the very small p-values (less than 0.05). This means that the likelihood that these findings are due to chance is very low. The higher the resilience, the lower the BDI score, which indicates fewer or less severe depressive symptoms.
+
+1e) 
+i) A higher Beck Depression Inventory (BDI) score is expected for individuals with very low resilience compared to those with low resilience. This aligns with previous findings. However, while the difference between these two groups remains consistent in this model, the magnitude of difference between categories varies in the original study.
+
+ii) The model suggests a uniform difference in BDI scores between resilience categories, with a decrease of 2.76 points for each step up in resilience. However, the original study indicated that the difference in scores is not consistent across categories.
+
+iii) The flaw in the model arises from its treatment of resilience as a numeric variable with equal intervals between categories. This assumes that the impact on BDI scores is the same between each consecutive resilience level, which is not the case in real-world observations. The actual difference in depressive symptoms varies according to the specific category of resilience, hence why this modeling approach may be considered flawed.
+
+2a) The appropriate test for evaluating if there is an association between coffee intake and depression is the Chi-square test of independence. This test is used to determine whether there is a significant association between two categorical variables.
+
+2b)The hypotheses for the Chi-square test of independence would be:
+
+Null hypothesis (H0): There is no association between caffeinated coffee consumption and the incidence of clinical depression.
+Alternative hypothesis (H1): There is an association between caffeinated coffee consumption and the incidence of clinical depression.
+
+2c) The percentage of females who experience depressive symptoms = 2607/50739
+```{r}
+2607/50739
+```
+The females who is not suffering from depression is 48132/50739
+```{r}
+48132/50739
+```
+
+2d) E = (total of row * total of column)/total count
+```{r}
+E = (2607*6617)/50739
+E
+```
+2e)
+test statistic (q) = 20.93
+degrees of freedom (df) = (number of rows -1) * (number of columns-1) = 4
+```{r}
+q = 20.93
+df = 4
+pchisq(q, df, lower.tail = FALSE)
+```
+
+2f) The p-value and the test statistic suggest the presence of an association between the two variables under consideration.
+
+The calculated p-value and test statistic indicate a correlation between the incidence of depression in women and their consumption of caffeinated coffee.
+
+2g)
+Indeed, it's premature to conclude that coffee consumption is the cause of depression, as there could be other influencing factors at play. This study reveals an association, not causation.
+
+3a) The data provided can be used to estimate the proportion of possibly fraudulent claims among large claims, but it cannot be used to estimate the overall proportion of fraudulent claims that are large claims. This is because the data come from a stratified sample rather than a simple random sample, and each stratum is not necessarily proportional to its prevalence in the population. Upon examining the table, it's noted that out of the 39 claims sampled from the large claim stratum, 4 were determined to be not allowed. Hence, the ratio of not allowed claims within the large claim group is 4 divided by 39, which equals approximately 0.1026.
+
+3b)  Here is the 2x3 contingency table with marginal totals:
+```{r}
+c_table <- matrix(c(90, 33, 0, 10, 17, 20), nrow = 2, ncol = 3, byrow = TRUE)
+rownames(c_table) <- c("Allowed", "Not Allowed")
+colnames(c_table) <- c("Small", "Medium", "Large")
+observed_table <- addmargins(c_table)
+observed_table
+
+```
+
+
+3c) Assuming there's no correlation between the claim size and the disallowance of the claim, the projected count of disallowed claims within the category of large claims can be calculated as:
+Projected count = (sum of disallowed claims / sum of all claims) × (quantity of large claims)
+Projected count = (31/170) × 20 = 3.65
+
+3d) The application of the chi-square statistic to this dataset is appropriate since the data are categorized and the expected frequencies in each cell exceed 5.
+
+3e) The chi-square test yields 2 degrees of freedom, and the significance level for the test indicating no association is below 0.001.
+```{r}
+testvalue = 12.93
+dof = 2
+pchisq(12.93 ,2, lower.tail = FALSE)
+
+```
+3f)
+```{r}
+
+observed <- c(10, 17, 4)
+totals <- c(100, 50, 20)
+
+grand_total_claims <- sum(totals)
+grand_total_not_allowed <- sum(observed)
+expected <- (totals / grand_total_claims) * grand_total_not_allowed
+
+# chi-square residuals
+residuals <- (observed - expected) / sqrt(expected)
+
+print(residuals)
+
+```
+Residuals are determined by taking the difference between the actual and estimated figures for each cell. When residuals are positive, it signifies that the actual counts exceed the estimated counts, while negative residuals indicate the actual counts fall short of what was anticipated. Typically, residuals with an absolute value above 2 are considered noteworthy. In the scenario described, the negative residuals for small and medium claims indicate a smaller number of rejections than anticipated, whereas the positive residuals for large claims suggest a higher number of rejections than anticipated. This could imply a potential association between the probability of a claim being identified as possibly fraudulent and the magnitude of the claim, with larger claims possibly having a higher tendency to be fraudulent or to contain issues that could be deemed fraudulent.
+
+4a) 
+```{r}
+exposed_children <- 958
+exposed_with_asthma <- 19
+total_children <- 276281
+total_with_asthma <- 11585
+
+unexposed_children <- total_children - exposed_children
+unexposed_with_asthma <- total_with_asthma - exposed_with_asthma
+
+proportion_exposed_with_asthma <- exposed_with_asthma / exposed_children
+proportion_unexposed_with_asthma <- unexposed_with_asthma / unexposed_children
+
+#odds_ratio <- (proportion_exposed_with_asthma / (1 - proportion_exposed_with_asthma)) /
+              #(proportion_unexposed_with_asthma / (1 - proportion_unexposed_with_asthma))
+odds_ratio <- (19/958) / (11585/275323) 
+ln_or <- log(odds_ratio)
+
+# Standard error 
+se_ln_or <- sqrt((1/19) + (1/11585) +
+                 (1/958) + (1/275323))
+
+# 95% Confidence Interval for the log odds ratio
+ci_lower_ln_or <- ln_or - 1.96 * se_ln_or
+ci_upper_ln_or <- ln_or + 1.96 * se_ln_or
+
+ci_lower_or <- exp(ci_lower_ln_or)
+ci_upper_or <- exp(ci_upper_ln_or)
+
+# Print the results
+print(paste("Proportion with asthma in exposed group:", proportion_exposed_with_asthma))
+print(paste("Proportion with asthma in unexposed group:", proportion_unexposed_with_asthma))
+print(paste("Odds ratio:", odds_ratio))
+print(paste("95% CI lower bound:", ci_lower_or))
+print(paste("95% CI upper bound:", ci_upper_or))
+
+
+
+```
+
+4b)
+Indeed, relative risk seems to be a suitable measure for evaluating the association in this context. The focus of the study is not on the onset or diagnosis of asthma, but rather on the exposure status to farm animals. Therefore, relative risk provides a relevant measure of how exposure may correlate with asthma incidence.
+
+4c)
+The outcomes of the Norwegian study don't conclusively demonstrate that exposure to farm animals reduces asthma incidence. They merely indicate an association between early contact with farm animals and a lower likelihood of asthma diagnosis by age 6. This association could be subject to the influence of other factors or potential confounders. Being a retrospective study, it may not fully account for all confounding variables. For instance, the hardworking lifestyle of farm families could contribute to genetic factors in children, rather than the direct effect of animal exposure.
+
+5a) odds ration for the survival is ad/bc
+```{r}
+a = 14
+d= 39
+b= 11
+c= 26
+odds_ratio = (a*d)/(b*c)
+odds_ratio
+```
+
+relative risk of survival is (a/a+b)/(c/c+d)
+```{r}
+a = 14
+d= 39
+b= 26
+c= 11
+relative_risk = (a/(a+b))/(c/(c+d))
+relative_risk
+```
+
+5b) Relative risk is often the metric of choice for contrasting the likelihood of an outcome occurring across two different interventions. This is because it tends to be more intuitive and straightforward to understand. In this particular case, it is the favorable measure and is applicable in forward-looking, or prospective, studies. Additionally, relative risk provides a direct estimate of how much more, or less, likely the event is to happen in one group compared to another, thereby aiding in clearer decision-making regarding intervention strategies.
+
+
+6a) With a p-value of 0.92, the data does not provide sufficient grounds to dismiss the null hypothesis, suggesting no significant association. The results align with the null hypothesis, proposing that the consumption of green tea does not have a relationship with the incidence of esophageal cancer.
+
+6b) The study's methodology, which involves outcome-dependent sampling, dictates the use of the odds ratio as the appropriate measure of association rather than relative risk. The calculated odds ratio of 1.08 for esophageal cancer indicates that individuals who are regular green tea consumers have a marginally increased probability, about 8%, of developing carcinoma compared to those who do not drink green tea at all.

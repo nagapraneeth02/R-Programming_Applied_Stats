@@ -1,0 +1,160 @@
+#1
+students_smoking_probability <- 0.13
+
+# Assume there are 10,000 students
+total_students <- 10000   
+
+#a random sample of 100 students
+sample_size <- 100
+simulated_sample <- sample(c(0, 1), size = sample_size, prob = c(1 - students_smoking_probability, students_smokikng_probability), replace = TRUE)
+
+# Calculate the expected number of smokers in the sample
+expected_smokers <- sum(simulated_sample)
+print(expected_smokers)
+# b
+The reason for this is that the 13% smoking rate mentioned is the overall percentage for university students. It may or may not be typical of the precise group of students waiting outside the gym at that moment. Individual smoking habits vary, and this set of students may not smoke at the same rate as the university's average.
+
+#2
+mean_temp <- 77
+standard_dev <- 5
+x <- 83
+#Z-score calculation
+z_score <- (x - mean_temp) / standard_dev
+a<- pnorm(q = x, mean = mean_temp, sd = standard_dev, lower.tail = FALSE)
+print(round(a, 4))
+# (b) Temperature for coldest 10% of days 
+p <- 0.10
+coldest_temp <- qnorm(p, mean = mean_temp, sd = standard_dev)
+print(round(coldest_temp, 2))
+  
+#3
+p_O_pos <- 0.37 # Proportion O+
+p_O_neg <- 0.08 # Proportion O-
+n <- 15 # Sample size 
+# expected o_pos
+expected_O_pos <- n * p_O_pos
+#standard deviation for Type O+ donors
+std_O_pos <- sqrt(n * p_O_pos * (1-p_O_pos))
+print(expected_O_pos)
+print(std_O_pos)
+#b
+p_O_neg_donors <- n * p_O_neg # Expected O- donors 
+prob <- pbinom(q = 2, size = n, prob = p_O_neg, lower.tail = FALSE)
+print(prob)
+
+#4
+
+#4
+
+#a) 
+#Probability of infection
+p_infected <- 0.30
+
+# sample size
+n <- 250
+
+# Number of successes 
+k <- 60
+
+# Calculate the probability
+prob_a <- dbinom(k, n, p_infected)
+print(round(prob_a, 4))
+#b
+#cumulative probability up to 60 infected stocks
+prob_b <- pbinom(60, n, p_infected)
+print(round(prob_b, 4))
+#c
+#cumulative probability from 0 to 79 infected stocks and subtract it from 1
+prob_c <- 1 - pbinom(79, n, p_infected)
+print(round(prob_c, 4))
+#d
+#cumulative probability from 0 to 100 infected stocks
+prob_d <- pbinom(100, n, p_infected)
+print(round(prob_d, 4))
+
+#5
+
+# (a) P(Z > 2.60)
+pnorm(q = 2.60, mean = 0, sd = 1, lower.tail = FALSE) 
+
+# (b) P(Z < 1.35)
+pnorm(q = 1.35, mean = 0, sd = 1)
+
+# (c) P(-1.70 < Z < 3.10) 
+pnorm(q = 3.10, mean = 0, sd = 1) - pnorm(q = -1.70, mean = 0, sd = 1)
+
+# (d) Value of Z for upper 15%
+qnorm(p = 0.85, mean = 0, sd = 1)
+
+# (e) Value of Z for lower 20% 
+qnorm(p = 0.20, mean = 0, sd = 1)
+
+#6
+
+# Men's group
+mean_male <- 4313  
+std_male <- 583
+
+# Women's group 
+mean_female <- 5261
+std_female <- 807
+# (a) 
+time_male <- 4948
+prob_male <- pnorm(time_male, mean = mean_male, sd = std_male) 
+
+# (b)
+time_female <- 5513
+prob_female <- pnorm(time_female, mean = mean_female, sd = std_female)
+
+# (c) Top 5% cutoff time
+cutoff_male <- qnorm(0.95, mean = mean_male, sd = std_male)
+
+# (d) Bottom 10% cutoff time
+cutoff_female <- qnorm(0.10, mean = mean_female, sd = std_female)
+
+print(prob_male) 
+print(prob_female)  
+print(cutoff_male) 
+print(cutoff_female)
+
+
+#7
+
+#a)
+No, the final exam scores of the 20 introductory statistics students do not appear to follow a normal distribution.
+- The histogram is not symmetrical, it looks like that was skewed to the right.Which is not a characteristic of a normal distribution.
+- Data has a wide range of scores from 60 to 90. This is not a charecter of a normal distribution, which is more bell shaped and concentrated around the mean.
+
+#b)
+No, the heights of the 25 female college students do not appear to follow a normal distribution.
+-The histogram is not symmetrical, with a longer tail on the right-hand side. data is skewed to the right, which is not characteristic of a normal distribution.
+There are a few outliers in the data, with heights of 54 and 73 inches. Outliers can also skew the results of normality tests.
+
+
+#8
+#a) The mean number of typos per hour is given as 1.
+# Since this follows a Poisson distribution, the standard deviation is equal to the square root of the mean.Therefore, the mean is 1 and the standard deviation is sqrt(1) = 1.
+# (a) Mean and SD
+lambda <- 1 
+mean <- lambda
+sd <- sqrt(lambda)
+# (b) P(X <= 3) per hour
+p_b <- ppois(q = 3, lambda = lambda)
+ 
+#9
+# Probabilities
+prob_blue <- 0.125
+prob_nonblue <- 0.875
+
+# (a) P(blue on 3rd)
+prob_a <- (prob_nonblue)^2 * prob_blue
+
+# (b) Mean and SD until first blue
+mean_b <- 1/prob_blue 
+sd_b <- sqrt(prob_nonblue)/prob_blue
+
+print(prob_a)
+print(mean_b)
+print(sd_b)
+
+#10

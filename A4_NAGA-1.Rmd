@@ -1,0 +1,250 @@
+---
+title: "A4"
+author: "Naga Praneeth Cheela"
+date: "2023-10-07"
+output:
+  word_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+
+## Problem 1. Hemophilia. 
+
+Hemophilia is a sex-linked bleeding disorder that slows the blood clotting process. In severe cases of hemophilia, continued bleeding occurs after minor trauma or even in the absence of injury. Hemophilia affects 1 in 5,000 male births. In the United States, about 400 males are born with hemophilia each year; there are approximately 4,000,000 births per year. Note: this problem is best done using statistical software.  (2 pts)
+
+(a) What is the probability that at most 380 newborns in a year are born with hemophilia?  (0.5 pts)
+```{r}
+p_m <- 1/5000
+r <- (1/5000) * (4000000/2)
+ppois(380, lambda=r)
+```
+(b) What is the probability that 450 or more newborns in a year are born with hemophilia?  (0.5 pts)
+```{r}
+ppois(449,lambda = r, lower.tail = FALSE)
+```
+(c) Consider a hypothetical country in which there are approximately 1.5 million births per year. If the incidence rate of hemophilia is equal to that in the US, how many newborns are expected to have hemophilia in a year, with what standard deviation?  (1 pt)
+
+```{r}
+#For male
+births_male <- 1500000/2
+one_yr_rate <- 150
+std_dev <- sqrt(150)
+std_dev
+
+```
+```{r}
+#for both the genders
+Births<- 1500000
+one_yr_rate1 <- 300
+s_d <- sqrt(300)
+s_d
+
+```
+
+
+## Problem 2.   (2 pts)
+
+(a)Generate 1600 random numbers from a Poisson distribution with lambda = 2. Plot the histogram of the generated numbers. (0.5 pts)
+```{r}
+set.seed(200)
+d <- rpois(n=1600, lambda = 2)
+hist(d, breaks = 10, col = 'black', xlab = "No.of Events", main = "Histogram of 1600 randomly selected numbers" )
+```
+(b) In a hospital, the number of patients admitted each day follows a Poisson distribution with a mean of 20 patients per day. What is the probability that the hospital will admit at most 25 patients in a day? (0.5 pts)
+```{r}
+p_25 <- ppois(25, lambda = 20)
+p_25
+```
+(c) A hospital records an average of 5 patient arrivals per hour in the emergency room. What is the probability that at least 8 patients will arrive in the next 2 hours? (0.5 pts)
+
+```{r}
+p_8 <- 1-ppois(7, lambda = 10)
+p_8
+```
+(d) The number of cases of COVID-19 reported in a city follows a Poisson distribution with a mean of 10 cases per day. What is the probability that there will be no more than 70 cases reported in a week? (0.5 pts)
+```{r}
+p_70 <- ppois(70, lambda = 70)
+p_70
+```
+
+## Problem 3.Hen eggs. 
+
+The distribution of the number of eggs laid by a certain species of hen during their breeding period is on average, 35 eggs, with a standard deviation of 18.2. Suppose a group of researchers randomly samples 45 hens of this species, counts the number of eggs laid during their breeding period, and records the sample mean. They repeat this 1,000 times, and build a distribution of sample means. (2 pts)
+(a) What is this distribution called? (0.5 pts)
+(b) Would you expect the shape of this distribution to be symmetric, right skewed, or left skewed? Explain your reasoning. (0.5 pts)
+(c) Calculate the variability of this distribution and state the appropriate term used to refer to this value. (0.5 pts)
+(d) Suppose the researchers’ budget is reduced and they are only able to collect random samples of 10 hens. The sample mean of the number of eggs is recorded, and we repeat this 1,000 times, and build a new distribution of sample means. How will the variability of this new distribution compare to the variability of the original distribution? (0.5 pts)
+
+#Answers:
+
+
+```{r}
+#a) Finite sampling distribution
+#b) The sampling distribution of the mean would be approximately normally distributed. Therefore, I would expect the shape to be symmetric and bell-shaped, not skewed.By the Central Limit Theorem, the sampling distribution of the mean approaches a normal distribution as the sample size increases, regardless of the original population distribution.
+#c)
+std_error <- (18.2/sqrt(45))
+std_error
+#d) Reducing the sample size from 45 to 10 will increase the variability of the sampling distribution of the mean. With a smaller sample size, the sample mean is less stable and more heavily influenced by individual values, resulting in a wider distribution.
+cal<- (18.2/sqrt(10))
+cal
+# Hence 5.75 is greater than 2.71 variability of new distribution is greater than variability of original distribution
+```
+
+
+
+## Problem 4. 
+The 2010 General Social Survey asked the question: “For how many days during the past 30 days was your mental health, which includes stress, depression, and problems with emotions, not good?" Based on responses from 1,151 US residents, the survey reported a 95% confidence interval of 3.40 to 4.24 days in 2010. (2 pts)
+
+(a) What does “95% confident" mean? Explain in the context of the application. (1 pt)
+```{r}
+#The 95% confidence interval is constructed using approximately 2 standard deviations around the sample mean."95% confident" means that if we took repeated samples and constructed a 95% confidence interval from each sample, 95% of those intervals would contain the true population mean number of bad mental health days.
+```
+
+(b) If a new survey were to be done with 500 Americans, would the standard error of the estimate be larger,smaller, or about the same? Assume the standard deviation has remained constant since 2010. 
+(1 pt)
+```{r}
+#The standard error would be larger with a sample size of 500 compared to 1,151. This is because the standard error is calculated as the standard deviation divided by the square root of the sample size, so a smaller sample size results in a larger standard error.
+```
+
+
+
+
+## Problem 5. 
+
+Write the null and alternative hypotheses in words and then symbols for
+each of the following situations. (2 pts)
+
+(a) New York is known as “the city that never sleeps". A random sample of 25 New Yorkers were asked how much sleep they get per night. Do these data provide convincing evidence that New Yorkers on average sleep less than 8 hours a night? (1 pt)
+```{r}
+#Null Hypothesis: The average nightly sleep duration for residents of New York is 8 hours or mu = 8.
+
+#Alternative Hypothesis: The average nightly sleep duration for residents of New York is less than 8 hours or Ha: mu < 8.
+```
+
+(b) Employers at a firm are worried about the effect of March Madness, a basketball championship held each spring in the US, on employee productivity. They estimate that on a regular business day employees spend on average 15 minutes of company time checking personal email, making personal phone calls, etc. They also collect data on how much company time employees spend on such non- business activities during March Madness. They want to determine if these data provide convincing evidence that employee productivity decreases during March Madness. (1 pt)
+```{r}
+#Null Hypothesis (H0): The average amount of company time spent on non-business activities by employees during March Madness is no different from the average time spent on such activities on a regular business day, which is estimated to be 15 minutes. (mu = 15).
+
+#Alternative Hypothesis (Ha): The average amount of company time spent on non-business activities by employees during March Madness is greater than 15 minutes, indicating a potential decrease in productivity. (mu > 15)
+```
+
+
+## Problem 6.
+The nutrition label on a bag of potato chips says that a one ounce (28 gram) serving
+of potato chips has 130 calories and contains ten grams of fat, with three grams of saturated fat. A random sample of 35 bags yielded a sample mean of 134 calories with a standard deviation of 17 calories. Is there evidence that the nutrition label does not provide an accurate measure of calories in the bags of potato chips? We have verified the independence, sample size, and skew conditions are satisfied. (2 pts)
+
+
+```{r}
+sm <- 134
+pm <- 130
+sd <- 17
+n <- 35
+a <- (sm-pm)/(sd/sqrt(35))
+a
+```
+```{r}
+p_val <- 2* pt(-abs(a), df = n-1)
+p_val
+```
+
+
+## Problem 7. Waiting at an ER,
+
+A hospital administrator hoping to improve wait times decides to estimate the
+average emergency room waiting time at her hospital. She collects a simple random sample of 64 patients and determines the time (in minutes) between when they checked in to the ER until they were first seen by a doctor. A 95% confidence interval based on this sample is (128 minutes, 147 minutes), which is based on the normal model for the mean. Determine whether the following statements are true or false, and explain your reasoning. (3.5 pts)
+
+(a) This confidence interval is not valid since we do not know if the population distribution of the ER wait times is nearly Normal. (0.5 pts)
+```{r}
+#False. This statement is false because the assumption for using a confidence interval based on the normal model is that the distribution of the sample mean should be approximately normal. Given that the sample size is 64 (n = 64), the Central Limit Theorem (CLT) can be applied. Therefore, as long as the sample size is reasonably large (and 64 is sufficiently large), we can use the normal approximation for the confidence interval.
+```
+(b) We are 95% confident that the average waiting time of these 64 emergency room patients is between 128 and 147 minutes.(0.5 pts)
+```{r}
+#False. Confidence intervals are used to estimate population parameters, not to make statements about the specific sample. The point estimate (sample mean) is always within the confidence interval.
+```
+(c) We are 95% confident that the average waiting time of all patients at this hospital’s emergency room is between 128 and 147 minutes. (0.5 pts)
+```{r}
+#True. This statement is true. A 95% confidence interval is constructed to provide an interval estimate for the population parameter. We can say that we are 95% confident that the true population mean lies within the interval. This interpretation is in the context of making an inference about the entire population, not just the sample.
+```
+(d) 95% of random samples have a sample mean between 128 and 147 minutes. (0.5 pts)
+```{r}
+#This statement is false because the purpose of a confidence interval is not to make statements about sample means; it's about estimating population parameters. A 95% confidence interval provides a range within which we are 95% confident that the population parameter falls.
+```
+(e) A 99% confidence interval would be narrower than the 95% confidence interval since we need to be more sure of our estimate.(0.5 pts)
+```{r}
+# False. A higher confidence level, such as 99%, requires a wider confidence interval to provide greater confidence in capturing the population parameter.
+```
+(f) The margin of error is 9.5 and the sample mean is 137.5. (0.5 pts)
+```{r}
+#True. The margin of error in a confidence interval is half the width of the interval. In this case, the confidence interval is (128 minutes, 147 minutes), so the margin of error is (147 - 128) / 2 = 9.5 minutes. The sample mean is indeed the midpoint of the confidence interval, which is 137.5 minutes.
+```
+(g) Halving the margin of error of a 95% confidence interval requires doubling the sample size. (0.5 pts)
+```{r}
+#False. Halving the margin of error of a confidence interval does not require doubling the sample size. The relationship between the margin of error and the sample size is inversely proportional to the square root of the sample size. To halve the margin of error, we would need to increase the sample size by a factor of four (not two) because the square root of 4 is 2.
+```
+
+
+
+## Problem 8.
+
+Suppose an investigator takes a random sample of n = 50 birth weights from several
+teaching hospitals located in an inner-city neighborhood. In her random sample, the sample mean x is 3,150 grams and the standard deviation is 250 grams. (2 pts)
+
+(a) Calculate a 95% confidence interval for the population mean birth weight in these hospitals.(1 pt)
+
+(b) The typical weight of a baby at birth for the US population is 3,250 grams. The investigator suspects that the birth weights of babies in these teaching hospitals is different than 3,250 grams, but she is not sure if it is smaller (from malnutrition) or larger (because of obesity prevalence in mothers giving birth at these hospitals). Carry out the hypothesis test that she would conduct. (1 pt)
+
+## Answers 8.
+
+```{r}
+n <- 50
+x <- 3150
+std <- 250
+c <- 3150+1.96*(250/sqrt(50))
+c
+
+e <- 3150-1.96*(250/sqrt(50))
+e
+
+```
+
+```{r}
+n <- 50
+x <- 3150
+std <- 250
+mn <- 3250
+t <- (x-mn)/(std/sqrt(n))
+t
+pval <- 2* pt(-abs(t), df = n-1)
+pval
+```
+
+## Problem 9. Testing for fibromyalgia.
+
+A patient named Diana was diagnosed with fibromyalgia, a long-term syndrome of body pain, and was prescribed anti-depressants. Being the skeptic that she is, Diana didn’t initially believe that anti-depressants would help her symptoms. However after a couple months of being on the medication she decides that the anti-depressants are working, because she feels like her symptoms are in fact getting better. (2.5 pts)
+
+(a) Write the hypotheses in words for Diana’s skeptical position when she started taking the anti-depressants. (0.5 pts)
+```{r}
+#Null Hypothesis (H0): Diana believed that anti-depressants would not improve her fibromyalgia symptoms.
+#Alternative Hypothesis (HA): Diana considered the possibility that anti-depressants could alleviate her fibromyalgia symptoms.
+```
+
+(b) What is a Type 1 Error in this context? (0.5 pts)
+```{r}
+#A Type 1 Error would mean that Diana wrongly believed that the anti-depressants were effective for her fibromyalgia symptoms when, in reality, they did not provide any relief.
+```
+
+(c) What is a Type 2 Error in this context? (0.5 pts)
+```{r}
+#A Type 2 Error would mean that Diana incorrectly concluded that the anti-depressants were not effective for her fibromyalgia symptoms, even though they could have been beneficial.
+```
+
